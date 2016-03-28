@@ -28,7 +28,7 @@ class SwfitTestsTests: QuickSpec {
             context("when passed a marker color and a non-matching chip", {
                 it("cannot unlock panel") {
                     let panel = SecurityPanel()
-                    let chipsArray = ["blue,green", "blue,green"]
+                    let chipsArray = ["blue,green", "blue,red"]
                     let returnedOrder = panel.unlockPanelWithChipsAndMarker(chipsArray)
                     
                     expect(returnedOrder).to(equal("Cannot unlock master panel"))
