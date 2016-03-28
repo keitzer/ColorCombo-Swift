@@ -51,7 +51,7 @@ class SwfitTestsTests: QuickSpec {
                 }
                 
                 it("should NOT unlock when chips DON'T align") {
-                    let chipsArray = ["blue,green", "red,purple", "blue,red", "purple,yellow", "yellow,green"]
+                    let chipsArray = ["blue,green", "red,purple", "blue,red", "purple,yellow", "yellow,red"]
                     let returnedOrder = panel.unlockPanelWithChipsAndMarker(chipsArray)
                     
                     expect(returnedOrder).to(equal("Cannot unlock master panel"))
