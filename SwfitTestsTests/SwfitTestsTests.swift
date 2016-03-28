@@ -15,9 +15,10 @@ import Nimble
 class SwfitTestsTests: QuickSpec {
     override func spec() {
         describe("Security Panel") {
+            let panel = SecurityPanel()
+            
             context("when passed a marker and an identical chip", {
                 it("unlocks the panel") {
-                    let panel = SecurityPanel()
                     let chipsArray = ["blue,green", "blue,green"]
                     let returnedOrder = panel.unlockPanelWithChipsAndMarker(chipsArray)
                     
@@ -27,7 +28,6 @@ class SwfitTestsTests: QuickSpec {
             
             context("when passed a marker color and a non-matching chip", {
                 it("cannot unlock panel") {
-                    let panel = SecurityPanel()
                     let chipsArray = ["blue,green", "blue,red"]
                     let returnedOrder = panel.unlockPanelWithChipsAndMarker(chipsArray)
                     
