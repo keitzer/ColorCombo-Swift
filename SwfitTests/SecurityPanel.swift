@@ -28,7 +28,7 @@ class SecurityPanel {
                 
                 if chipColors[0] == markerColors[0] {
                     var remainingChips = chipsArray
-                    remainingChips.removeAtIndex(0)
+                    remainingChips.removeAtIndex(chipsArray.indexOf(chip)!)
                     
                     for otherChip in remainingChips {
                         let otherChipColors = otherChip.componentsSeparatedByString(",")
