@@ -63,7 +63,7 @@ class SwfitTestsTests: QuickSpec {
                     let chipsArray = ["blue,green", "blue,yellow", "red,orange", "red,green", "yellow,red", "orange,purple"]
                     let returnedOrder = panel.unlockPanelWithChipsAndMarker(chipsArray)
                     
-                    expect(returnedOrder).to(equal("Something"))
+                    expect(returnedOrder).to(equal("Cannot unlock master panel"))
                 }
             })
             
