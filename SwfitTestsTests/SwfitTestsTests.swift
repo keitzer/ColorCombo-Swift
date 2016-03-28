@@ -76,6 +76,15 @@ class SwfitTestsTests: QuickSpec {
                 }
             })
             
+            context("EX 3: when passed a marker and 8 aligned chips", {
+                it("should not unlock panel") {
+                    let chipsArray = ["blue,green", "blue,green", "blue,yellow", "green,yellow", "orange,red", "red,green", "red,orange", "yellow,blue", "yellow,red"]
+                    let returnedOrder = panel.unlockPanelWithChipsAndMarker(chipsArray)
+                    
+                    expect(returnedOrder).to(equal("blue,green green,yellow yellow,blue blue,yellow yellow,red red,orange orange,red red,green"))
+                }
+            })
+            
             context("when passed a marker color and a non-matching chip", {
                 it("cannot unlock panel") {
                     let chipsArray = ["blue,green", "blue,red"]
