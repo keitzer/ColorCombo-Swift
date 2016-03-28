@@ -2,7 +2,7 @@
 1) install cocoapods with Terminal
 ```
 sudo gem install cocoapods
-pod setup
+pod setup --verbose
 ```
 
 2) clone repo
