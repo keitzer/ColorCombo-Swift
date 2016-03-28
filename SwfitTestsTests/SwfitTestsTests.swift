@@ -6,8 +6,9 @@
 //  Copyright © 2016 swifd. All rights reserved.
 //
 
-import XCTest
 @testable import SwfitTests
+
+import XCTest
 import Quick
 import Nimble
 
@@ -17,7 +18,10 @@ class SwfitTestsTests: QuickSpec {
             context("when passed a marker and an identical chip", {
                 it("unlocks the panel") {
                     let panel = SecurityPanel()
+                    let chipsArray = ["blue,green", "blue,green"]
+                    let returnedOrder = panel.unlockPanelWithChipsAndMarker(chipsArray)
                     
+                    expect(returnedOrder).to(equal("blue,green"))
                 }
             })
         }
