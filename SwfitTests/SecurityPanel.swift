@@ -14,13 +14,37 @@ class SecurityPanel {
         if chipsAndMarkerArray.count < 2 {
             return "Cannot unlock master panel"
         }
-        
-        if chipsAndMarkerArray[0] == chipsAndMarkerArray[1] {
+        else if chipsAndMarkerArray.count == 2 && chipsAndMarkerArray[0] == chipsAndMarkerArray[1] {
             return chipsAndMarkerArray[1]
         }
         else {
-            return "Cannot unlock master panel"
+            
+            let markerColors = chipsAndMarkerArray[0].componentsSeparatedByString(",")
+            var chipsArray = chipsAndMarkerArray
+            chipsArray.removeAtIndex(0)
+            
+            for chip in chipsArray {
+                let chipColors = chip.componentsSeparatedByString(",")
+                
+                if chipColors[0] == markerColors[0] {
+                    var remainingChips = chipsArray
+                    remainingChips.removeAtIndex(0)
+                    
+                    for otherChip in remainingChips {
+                        let otherChipColors = otherChip.componentsSeparatedByString(",")
+                        if otherChipColors[0] == chipColors[1] && otherChipColors[1] == markerColors[1] {
+                            return "\(chip) \(otherChip)"
+                        }
+                        else {
+                            return "Cannot unlock master panel"
+                        }
+                    }
+                }
+            }
         }
+        
+        //when it doubt, return "cannot unlock"
+        return "Cannot unlock master panel"
     }
 }
 
