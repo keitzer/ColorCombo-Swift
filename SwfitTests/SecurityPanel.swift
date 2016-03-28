@@ -10,41 +10,61 @@ import Foundation
 
 class SecurityPanel {
     
+    var markerColors = [String]()
+    
     func unlockPanelWithChipsAndMarker(chipsAndMarkerArray: [String]) -> String {
         if chipsAndMarkerArray.count < 2 {
             return "Cannot unlock master panel"
         }
-        else if chipsAndMarkerArray.count == 2 && chipsAndMarkerArray[0] == chipsAndMarkerArray[1] {
-            return chipsAndMarkerArray[1]
-        }
         else {
             
-            let markerColors = chipsAndMarkerArray[0].componentsSeparatedByString(",")
+            markerColors = chipsAndMarkerArray[0].componentsSeparatedByString(",")
             var chipsArray = chipsAndMarkerArray
             chipsArray.removeAtIndex(0)
             
-            for chip in chipsArray {
-                let chipColors = chip.componentsSeparatedByString(",")
+            let solution = getCombinationWithRemainingChips(chipsArray, previousColor: markerColors[0])
+            
+            return solution
+        }
+    }
+    
+    func getCombinationWithRemainingChips(remainingChips: [String], previousColor: String) -> String {
+        if remainingChips.count == 1 {
+            let chipColors = remainingChips[0].componentsSeparatedByString(",")
+            if chipColors[0] == previousColor && chipColors[1] == markerColors[1] {
+                return remainingChips[0]
+            }
+            else {
+                return "Cannot unlock master panel"
+            }
+        }
+        
+        var solution = ""
+        var solutionFound = false
+        
+        for chip in remainingChips {
+            solution = ""
+            let chipColors = chip.componentsSeparatedByString(",")
+            
+            if chipColors[0] == previousColor {
+                var newChipArray = remainingChips
+                newChipArray.removeAtIndex(remainingChips.indexOf(chip)!)
                 
-                if chipColors[0] == markerColors[0] {
-                    var remainingChips = chipsArray
-                    remainingChips.removeAtIndex(chipsArray.indexOf(chip)!)
-                    
-                    for otherChip in remainingChips {
-                        let otherChipColors = otherChip.componentsSeparatedByString(",")
-                        if otherChipColors[0] == chipColors[1] && otherChipColors[1] == markerColors[1] {
-                            return "\(chip) \(otherChip)"
-                        }
-                        else {
-                            return "Cannot unlock master panel"
-                        }
-                    }
+                solution = chip + " " + getCombinationWithRemainingChips(newChipArray, previousColor: chipColors[1])
+                
+                if !solution.containsString("Cannot unlock master panel") {
+                    solutionFound = true
+                    break
                 }
             }
         }
         
-        //when it doubt, return "cannot unlock"
-        return "Cannot unlock master panel"
+        if solutionFound {
+            return solution
+        }
+        else {
+            return "Cannot unlock master panel"
+        }
     }
 }
 
